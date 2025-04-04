@@ -20,4 +20,13 @@ def simulate():
     else:
         return jsonify({"error": "Unsupported algorithm"}), 400
 
+
+@app.route("/")
+def home():
+    return "Flask API is running!"
+
+@app.route("/test")
+def test():
+    return jsonify({"message": "test route is working"})
+
 #Gunicorn - handles the server
