@@ -1,7 +1,7 @@
 # flask-simulation-project-api
 # Flask Simulation API
 
-This Flask app provides an API endpoint `/api/simulate` to run the Hippopotamus Optimization Algorithm for photovoltaic system optimization.
+This Flask app provides an API endpoint `/api/simulate` to run the Hippopotamus Optimization Algorithm for photovoltaic system optimization. In addition it contains the other algorithms for comparison factors.
 
 ## Setup
 
