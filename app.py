@@ -1,44 +1,22 @@
 from flask import Flask, request, jsonify
-from simulation.algorithms import (
-    run_hippo_algorithm,
-    run_tlbo_algorithm,
-    run_genetic_algorithm,
-    run_pso_algorithm,
-    run_sa_algorithm,
-    run_gwo_algorithm,
-    run_hs_algorithm,
-    run_csa_algorithm,
-    run_lsa_algorithm,
-    run_epo_algorithm,
-    run_cs_algorithm,
-    run_abo_algorithm,
-    run_hem_algorithm,
-    run_wso_algorithm,
-    run_de_algorithm,
-    run_abc_algorithm
-)
+from simulation.hippopotamus import run_hippo_algorithm
+from simulation.tlbo import run_tlbo_algorithm
+from simulation.genetic import run_genetic_algorithm
+from simulation.pso import run_pso_algorithm
+from simulation.sa import run_sa_algorithm
+from simulation.gwo import run_gwo_algorithm
+from simulation.hs import run_hs_algorithm
+from simulation.csa import run_csa_algorithm
+from simulation.lsa import run_lsa_algorithm
+from simulation.epo import run_epo_algorithm
+from simulation.cs import run_cs_algorithm
+from simulation.abo import run_abo_algorithm
+from simulation.hem import run_hem_algorithm
+from simulation.wso import run_wso_algorithm
+from simulation.de import run_de_algorithm
+from simulation.abc import run_abc_algorithm
 
 app = Flask(__name__)
-
-# Mapping algorithm names to their functions
-ALGORITHM_MAP = {
-    "hippo": run_hippo_algorithm,
-    "tlbo": run_tlbo_algorithm,
-    "ga": run_genetic_algorithm,
-    "pso": run_pso_algorithm,
-    "sa": run_sa_algorithm,
-    "gwo": run_gwo_algorithm,
-    "hs": run_hs_algorithm,
-    "csa": run_csa_algorithm,
-    "lsa": run_lsa_algorithm,
-    "epo": run_epo_algorithm,
-    "cs": run_cs_algorithm,
-    "abo": run_abo_algorithm,
-    "hem": run_hem_algorithm,
-    "wso": run_wso_algorithm,
-    "de": run_de_algorithm,
-    "abc": run_abc_algorithm
-}
 
 @app.route("/run-algorithm", methods=["POST"])
 def run_algorithm():
@@ -49,12 +27,44 @@ def run_algorithm():
     pop_size = data.get("pop_size", 30)
     max_iter = data.get("max_iter", 100)
 
-    if algorithm not in ALGORITHM_MAP:
-        return jsonify({"error": "Invalid algorithm name."}), 400
-
     try:
-        result = ALGORITHM_MAP[algorithm](pop_size, max_iter, G, T)
+        if algorithm == "hippo":
+            result = run_hippo_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "tlbo":
+            result = run_tlbo_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "ga":
+            result = run_genetic_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "pso":
+            result = run_pso_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "sa":
+            result = run_sa_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "gwo":
+            result = run_gwo_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "hs":
+            result = run_hs_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "csa":
+            result = run_csa_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "lsa":
+            result = run_lsa_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "epo":
+            result = run_epo_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "cs":
+            result = run_cs_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "abo":
+            result = run_abo_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "hem":
+            result = run_hem_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "wso":
+            result = run_wso_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "de":
+            result = run_de_algorithm(pop_size, max_iter, G, T)
+        elif algorithm == "abc":
+            result = run_abc_algorithm(pop_size, max_iter, G, T)
+        else:
+            return jsonify({"error": f"Invalid algorithm: {algorithm}"}), 400
+
         return jsonify(result)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
