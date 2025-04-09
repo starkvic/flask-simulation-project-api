@@ -18,7 +18,7 @@ def run_tlbo_algorithm(pop_size, max_iter, G, T):
             new_solution = population[i] + np.random.rand() * (teacher - TF * mean)
             new_solution = np.clip(new_solution, 0, 100)
             new_fitness = objective_function([new_solution[0]], G, T)
-            current_fitness = objective_function(population[i][0], G, T)
+            current_fitness = objective_function([population[i][0]], G, T)
             if new_fitness > current_fitness:
                 population[i] = new_solution
 
