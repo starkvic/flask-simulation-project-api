@@ -1,6 +1,6 @@
 import numpy as np
 from simulation.utils import objective_function
-np.random.seed(49)
+
 def run_hippo_algorithm(pop_size, max_iter, G, T):
     population = np.random.uniform(0, 100, (pop_size, 1))
     convergence = []
