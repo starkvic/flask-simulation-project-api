@@ -9,7 +9,7 @@ def run_hippo_algorithm(pop_size, max_iter, G, T):
 
     for _ in range(max_iter):
         G = G * (0.9 + 0.2 * np.random.rand())
-        fitness = np.array([objective_function(v[0], G, T) for v in population])
+        fitness = np.array([objective_function(v, G, T) for v in population])
         best_idx = np.argmax(fitness)
         best_now = fitness[best_idx]
         best_voltage = population[best_idx][0]
