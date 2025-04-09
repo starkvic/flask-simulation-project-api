@@ -1,5 +1,4 @@
-import numpy as np
-np.random.seed(49)
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from simulation.algorithms.hippopotamus import run_hippo_algorithm
